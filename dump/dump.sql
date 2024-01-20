@@ -33,6 +33,16 @@ CREATE TABLE WARNINGS(
     notif INTEGER
 );
 
+create table line (
+    ID int auto_increment primary key ,
+    ville VARCHAR(200) not null ,
+    type int not null ,
+    x1 int,
+    x2 int,
+    y1 int,
+    y2 int
+);
+
 
 /*---INSERT INIT DATA---*/
 
