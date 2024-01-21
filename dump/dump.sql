@@ -7,7 +7,11 @@ CREATE TABLE CITY(
     color_flag INTEGER,
     actual_picture VARCHAR(200),
     number_beach INTEGER,
-    number_sea INTEGER
+    number_sea INTEGER,
+    picture longtext,
+    ip VARCHAR(200),
+    name_ip VARCHAR(200),
+    password_ip VARCHAR(200),
 );
 
 CREATE TABLE DATA(
