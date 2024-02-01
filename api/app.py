@@ -693,6 +693,9 @@ SUPERVISION
 @app.route("/supervision/all_pictures", methods=["GET"])
 @cross_origin()
 def display_all_picture():
+    key = request.args.get("key")
+    if key != RASPBERRY_KEY:
+        return jsonify({"error": "Access denied"})
     html: str = ""
     for filename in os.listdir("."):
         if filename.endswith(".png"):
@@ -730,7 +733,7 @@ def get_zone():
     with app.app_context():
         cursor = mysql.connection.cursor()
         cursor.execute("SELECT ID,type,x1,x2,y1,y2 "
-                       "FROM line WHERE ville=%s", (city,),)
+                       "FROM line WHERE ville=%s", (city,), )
         all_data = cursor.fetchall()
         cursor.close()
     return jsonify({"data": all_data})
@@ -825,7 +828,7 @@ def delete_zone():
         return jsonify({"res": "key error"})
     with app.app_context():
         cursor = mysql.connection.cursor()
-        cursor.execute("DELETE FROM line WHERE id=%s", (id,),)
+        cursor.execute("DELETE FROM line WHERE id=%s", (id,), )
         mysql.connection.commit()
         cursor.close()
     return jsonify({"res": "yes"})
