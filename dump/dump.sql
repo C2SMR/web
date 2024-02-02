@@ -14,7 +14,8 @@ CREATE TABLE CITY(
     password_ip VARCHAR(200),
     run_detection BOOLEAN,
     type_detection JSON,
-    blur BOOLEAN
+    blur BOOLEAN,
+    detector_id INTEGER
 );
 
 CREATE TABLE DATA(
