@@ -13,7 +13,8 @@ CREATE TABLE CITY(
     name_ip VARCHAR(200),
     password_ip VARCHAR(200),
     run_detection BOOLEAN,
-    type_detection JSON
+    type_detection JSON,
+    blur BOOLEAN
 );
 
 CREATE TABLE DATA(
