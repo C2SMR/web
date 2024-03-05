@@ -7,7 +7,8 @@ export class Footer extends React.Component {
             <footer>
                 <h2>A bientôt!</h2>
                 <img
-                    src={"https://media.discordapp.net/attachments/1084071570567335956/1162073344435302461/iu.png?ex=653a9c23&is=65282723&hm=07da00846db268a1af9f94ac1730846bfac5e5fb6dfaa06dac3d1cc013ef800b"}
+                    style={{width: "50px", height: "50px"}}
+                    src={"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F022%2F484%2F501%2Foriginal%2Fgoogle-play-store-icon-logo-symbol-free-png.png&f=1&nofb=1&ipt=ad7c8eeefe39aa2832952833b9ec1f055a59a75724599749109724d9ee7d0749&ipo=images"}
                     alt={"google play store"}
                     onClick={() => {
                         button_click__dataLayer("google play store");

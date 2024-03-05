@@ -16,8 +16,7 @@ services:
       - ./dump:/docker-entrypoint-initdb.d
 
   api:
-    build:
-      context: ./api
+    image: victordalet/c2smr-web-back:latest
     ports:
       - "5000:5000"
     container_name: api
