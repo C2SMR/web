@@ -42,7 +42,7 @@ export class Home extends React.Component {
             <Mouse/>
             <div class={"container-home container-home-page"}>
                 <h1><img alt={"logo"}
-                         src={"https://media.discordapp.net/attachments/1047568954845048944/1164928988586721390/logo_2.png?ex=6544ffaa&is=65328aaa&hm=a8778c1c34340bd698ddbf414541b04cc0fda897605e7f10dfa610404a05ce94&=&width=578&height=578"}/>
+                         src={process.env.PUBLIC_URL + "/logo_2.png"}/>
                 </h1>
                 <h2>Pour une baignade surveillée !</h2>
                 <div class={"btn-download"} onClick={() => {
@@ -52,15 +52,15 @@ export class Home extends React.Component {
                 </div>
                 <div class={"wrapper-img a"}>
                     <img alt={"img-round-pres"}
-                         src={"https://media.discordapp.net/attachments/1084071570567335956/1162305243846029404/image.png?ex=653b741c&is=6528ff1c&hm=24addab4efaf096a3e58f0f711ba635368792dac576a7d4b80210921ad1f7695&=&width=1000&height=521"}/>
+                         src={process.env.PUBLIC_URL + '/roboflow_round.png'}/>
                 </div>
                 <div className={"wrapper-img b"}>
                     <img alt={"img-round-pres"}
-                         src={"https://media.discordapp.net/attachments/1125864163391066186/1166836472427593728/image.png?ex=654bf025&is=65397b25&hm=93adbcfe4793897a0447b72bb6bb5d275eab244c3956f5c447ea258404d8a14f&=&width=1042&height=500"}/>
+                         src={process.env.PUBLIC_URL + '/roboflow_round.png'}/>
                 </div>
                 <div className={"wrapper-img c"}>
                     <img alt={"img-round-pres"}
-                         src={"https://media.discordapp.net/attachments/1125864163391066186/1166836579403300894/image.png?ex=654bf03f&is=65397b3f&hm=0a648c352920d9e7f834f74aa5a701210972a1abb36b41b60f54d978fefaf600&=&width=1042&height=373"}/>
+                         src={process.env.PUBLIC_URL + '/roboflow_round.png'}/>
                 </div>
             </div>
             <div class={"container-safe-beach container-home-page"}>
@@ -73,7 +73,7 @@ export class Home extends React.Component {
                     </div>
                 </div>
                 <img alt={"img app-pres 1"} class={"slide1"}
-                     src={"https://media.discordapp.net/attachments/1084071570567335956/1166835513328672788/image.png?ex=654bef41&is=65397a41&hm=59b5ed2759595f8c5540cc46b16449ba8287303613bf5eb1fc17f09d8b8e19b5&"}/>
+                     src={process.env.PUBLIC_URL + 'app.png'}/>
             </div>
             <div class={"container-roboflow container-home-page"}>
                 <h2>Qui sommes-nous ?</h2>
@@ -94,8 +94,11 @@ export class Home extends React.Component {
                     window.open("https://github.com/C2SMR");
                     button_click__dataLayer("github");
                 }}>GITHUB</span> .</h3>
+                <h3>Petit soutient de l'ESGI : <a
+                    style = {{color: "white", textDecoration: "underline"}}
+                    href={"https://www.esgi.fr/actualites/12012023-le-projet-c2smr-des-etudiants-de-l-esgi"}>Article</a></h3>
             </div>
-            <div class={"container-types-sensors container-home-page"}>
+            <div style={{display : 'none'}} class={"container-types-sensors container-home-page"}>
                 <div class={"cam"}>
                     <img alt={"camera"}
                          class={"slide5"}
@@ -108,6 +111,7 @@ export class Home extends React.Component {
                     <h3>Via une webcam Public !</h3>
                 </div>
             </div>
+
             <div class={"container-join container-home-page"}>
                 <h2 class={"slide3"}>Comment le mettre en place ?</h2>
                 <div class={"btn-join slide4"} onClick={() => {
