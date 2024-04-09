@@ -15,7 +15,9 @@ CREATE TABLE CITY(
     run_detection BOOLEAN,
     type_detection JSON,
     blur BOOLEAN,
-    detector_id INTEGER
+    detector_id INTEGER,
+    stop_detection datetime,
+    start_detection datetime,
 );
 
 CREATE TABLE DATA(
