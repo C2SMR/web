@@ -890,6 +890,73 @@ def update_line_param():
     return jsonify({"res": "yes"})
 
 
+@app.route("/city", methods=["GET"])
+@cross_origin()
+def get_city():
+    """
+    Get city details
+    ---
+    parameters:
+        - name: detector_id
+          in: query
+          type: integer
+          required: true
+    responses:
+        200:
+            description: {"data": city_data}
+    """
+    detector_id = request.args.get("detector_id", type=int)
+    if detector_id is None:
+        return jsonify({"error": "detector_id is required"}), 400
+
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT NAME, '
+                   'latitude, '
+                   'longitude, '
+                   'ip, '
+                   'name_ip, '
+                   'password_ip, '
+                   'blur, '
+                   'run_detection, '
+                   'type_detection, '
+                   'launch_detection, '
+                   'stop_detection '
+                   'FROM CITY '
+                   'WHERE detector_id = %s', (detector_id,))
+    city_data = cursor.fetchall()
+    cursor.close()
+    return jsonify({"data": city_data})
+
+
+@app.route("/cache_size", methods=["GET"])
+@cross_origin()
+def get_cache_size():
+    """
+    Get cache size
+    ---
+    parameters:
+        - name: detector_id
+          in: query
+          type: integer
+          required: true
+    responses:
+        200:
+            description: {"cache_size": cache_size}
+    """
+    detector_id = request.args.get("detector_id", type=int)
+    if detector_id is None:
+        return jsonify({"error": "detector_id is required"}), 400
+    
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT cache_size FROM CITY WHERE detector_id = %s', (detector_id,))
+    result = cursor.fetchone()
+    cursor.close()
+    
+    if result:
+        return jsonify({"cache_size": result[0]})
+    return jsonify({"cache_size": 4})
+
+
 """
 LAUNCH APPLICATION
 """
