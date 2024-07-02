@@ -951,10 +951,87 @@ def get_cache_size():
     cursor.execute('SELECT cache_size FROM CITY WHERE detector_id = %s', (detector_id,))
     result = cursor.fetchone()
     cursor.close()
-    
+
     if result:
         return jsonify({"cache_size": result[0]})
     return jsonify({"cache_size": 4})
+
+
+@app.route("/zone_orange", methods=["GET"])
+@cross_origin()
+def get_zone_orange():
+    """
+    Get orange zone coordinates
+    ---
+    parameters:
+        - name: city
+          in: query
+          type: string
+          required: true
+    responses:
+        200:
+            description: {"data": result}
+    """
+    city = request.args.get("city")
+    if city is None:
+        return jsonify({"error": "city is required"}), 400
+    
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 1', (city,))
+    result = cursor.fetchall()
+    cursor.close()
+    return jsonify({"data": result})
+
+
+@app.route("/zone_red", methods=["GET"])
+@cross_origin()
+def get_zone_red():
+    """
+    Get red zone coordinates
+    ---
+    parameters:
+        - name: city
+          in: query
+          type: string
+          required: true
+    responses:
+        200:
+            description: {"data": result}
+    """
+    city = request.args.get("city")
+    if city is None:
+        return jsonify({"error": "city is required"}), 400
+    
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 2', (city,))
+    result = cursor.fetchall()
+    cursor.close()
+    return jsonify({"data": result})
+
+@app.route("/zone_green", methods=["GET"])
+@cross_origin()
+def get_zone_green():
+    """
+    Get green zone coordinates
+    ---
+    parameters:
+        - name: city
+          in: query
+          type: string
+          required: true
+    responses:
+        200:
+            description: {"data": result}
+    """
+    city = request.args.get("city")
+    if city is None:
+        return jsonify({"error": "city is required"}), 400
+    
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 3', (city,))
+    result = cursor.fetchall()
+    cursor.close()
+    return jsonify({"data": result})
 
 
 """
