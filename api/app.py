@@ -890,7 +890,7 @@ def update_line_param():
     return jsonify({"res": "yes"})
 
 
-@app.route("/city", methods=["GET"])
+@app.route("/machine/city", methods=["GET"])
 @cross_origin()
 def get_city():
     """
@@ -928,7 +928,7 @@ def get_city():
     return jsonify({"data": city_data})
 
 
-@app.route("/cache_size", methods=["GET"])
+@app.route("/machine/cache_size", methods=["GET"])
 @cross_origin()
 def get_cache_size():
     """
@@ -957,7 +957,7 @@ def get_cache_size():
     return jsonify({"cache_size": 4})
 
 
-@app.route("/zone_orange", methods=["GET"])
+@app.route("/machine/zone_orange", methods=["GET"])
 @cross_origin()
 def get_zone_orange():
     """
@@ -983,7 +983,7 @@ def get_zone_orange():
     return jsonify({"data": result})
 
 
-@app.route("/zone_red", methods=["GET"])
+@app.route("/machine/zone_red", methods=["GET"])
 @cross_origin()
 def get_zone_red():
     """
@@ -1008,7 +1008,7 @@ def get_zone_red():
     cursor.close()
     return jsonify({"data": result})
 
-@app.route("/zone_green", methods=["GET"])
+@app.route("/machine/zone_green", methods=["GET"])
 @cross_origin()
 def get_zone_green():
     """
