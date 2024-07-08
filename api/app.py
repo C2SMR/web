@@ -946,9 +946,11 @@ def get_cache_size():
     detector_id = request.args.get("detector_id", type=int)
     if detector_id is None:
         return jsonify({"error": "detector_id is required"}), 400
-    
+
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT cache_size FROM CITY WHERE detector_id = %s', (detector_id,))
+    cursor.execute(
+        'SELECT cache_size FROM CITY WHERE detector_id = %s', (detector_id,)
+    )
     result = cursor.fetchone()
     cursor.close()
 
@@ -975,9 +977,12 @@ def get_zone_orange():
     city = request.args.get("city")
     if city is None:
         return jsonify({"error": "city is required"}), 400
-    
+
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 1', (city,))
+    cursor.execute(
+        'SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 1',
+        (city,)
+    )
     result = cursor.fetchall()
     cursor.close()
     return jsonify({"data": result})
@@ -1001,12 +1006,16 @@ def get_zone_red():
     city = request.args.get("city")
     if city is None:
         return jsonify({"error": "city is required"}), 400
-    
+
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 2', (city,))
+    cursor.execute(
+        'SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 2',
+        (city,)
+    )
     result = cursor.fetchall()
     cursor.close()
     return jsonify({"data": result})
+
 
 @app.route("/machine/zone_green", methods=["GET"])
 @cross_origin()
@@ -1026,9 +1035,12 @@ def get_zone_green():
     city = request.args.get("city")
     if city is None:
         return jsonify({"error": "city is required"}), 400
-    
+
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 3', (city,))
+    cursor.execute(
+        'SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 3',
+        (city,)
+    )
     result = cursor.fetchall()
     cursor.close()
     return jsonify({"data": result})
