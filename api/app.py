@@ -1038,7 +1038,7 @@ def get_zone_green():
 
     cursor = mysql.connection.cursor()
     cursor.execute(
-        'SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 3',
+        'SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 0',
         (city,)
     )
     result = cursor.fetchall()
