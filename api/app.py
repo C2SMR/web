@@ -890,6 +890,162 @@ def update_line_param():
     return jsonify({"res": "yes"})
 
 
+@app.route("/machine/city", methods=["GET"])
+@cross_origin()
+def get_city():
+    """
+    Get city details
+    ---
+    parameters:
+        - name: detector_id
+          in: query
+          type: integer
+          required: true
+    responses:
+        200:
+            description: {"data": city_data}
+    """
+    detector_id = request.args.get("detector_id", type=int)
+    if detector_id is None:
+        return jsonify({"error": "detector_id is required"}), 400
+
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT NAME, '
+                   'latitude, '
+                   'longitude, '
+                   'ip, '
+                   'name_ip, '
+                   'password_ip, '
+                   'blur, '
+                   'run_detection, '
+                   'type_detection, '
+                   'launch_detection, '
+                   'stop_detection '
+                   'FROM CITY '
+                   'WHERE detector_id = %s', (detector_id,))
+    city_data = cursor.fetchall()
+    cursor.close()
+    return jsonify({"data": city_data})
+
+
+@app.route("/machine/cache_size", methods=["GET"])
+@cross_origin()
+def get_cache_size():
+    """
+    Get cache size
+    ---
+    parameters:
+        - name: detector_id
+          in: query
+          type: integer
+          required: true
+    responses:
+        200:
+            description: {"cache_size": cache_size}
+    """
+    detector_id = request.args.get("detector_id", type=int)
+    if detector_id is None:
+        return jsonify({"error": "detector_id is required"}), 400
+
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        'SELECT cache_size FROM CITY WHERE detector_id = %s', (detector_id,)
+    )
+    result = cursor.fetchone()
+    cursor.close()
+
+    if result:
+        return jsonify({"cache_size": result[0]})
+    return jsonify({"cache_size": 4})
+
+
+@app.route("/machine/zone_orange", methods=["GET"])
+@cross_origin()
+def get_zone_orange():
+    """
+    Get orange zone coordinates
+    ---
+    parameters:
+        - name: city
+          in: query
+          type: string
+          required: true
+    responses:
+        200:
+            description: {"data": result}
+    """
+    city = request.args.get("city")
+    if city is None:
+        return jsonify({"error": "city is required"}), 400
+
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        'SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 1',
+        (city,)
+    )
+    result = cursor.fetchall()
+    cursor.close()
+    return jsonify({"data": result})
+
+
+@app.route("/machine/zone_red", methods=["GET"])
+@cross_origin()
+def get_zone_red():
+    """
+    Get red zone coordinates
+    ---
+    parameters:
+        - name: city
+          in: query
+          type: string
+          required: true
+    responses:
+        200:
+            description: {"data": result}
+    """
+    city = request.args.get("city")
+    if city is None:
+        return jsonify({"error": "city is required"}), 400
+
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        'SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 2',
+        (city,)
+    )
+    result = cursor.fetchall()
+    cursor.close()
+    return jsonify({"data": result})
+
+
+@app.route("/machine/zone_green", methods=["GET"])
+@cross_origin()
+def get_zone_green():
+    """
+    Get green zone coordinates
+    ---
+    parameters:
+        - name: city
+          in: query
+          type: string
+          required: true
+    responses:
+        200:
+            description: {"data": result}
+    """
+    city = request.args.get("city")
+    if city is None:
+        return jsonify({"error": "city is required"}), 400
+
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        'SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 3',
+        (city,)
+    )
+    result = cursor.fetchall()
+    cursor.close()
+    return jsonify({"data": result})
+
+
 """
 LAUNCH APPLICATION
 """
