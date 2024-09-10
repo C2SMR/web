@@ -24,10 +24,7 @@ export class Zone extends React.Component {
                 "city": this.name + '.png',
             })
         });
-        console.log('************')
-        console.log(image);
         image = await image.json();
-        console.log(image);
         image = image.picture;
         this.setState({image: image});
     }
