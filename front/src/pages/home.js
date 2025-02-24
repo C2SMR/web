@@ -63,6 +63,13 @@ export class Home extends React.Component {
                          src={process.env.PUBLIC_URL + '/roboflow_round.png'}/>
                 </div>
             </div>
+            <div class={"container-alert container-home-page"}>
+                <h2>Ce que nous proposons ?</h2>
+                <h3><span>Détection automatique</span> d'éloignement en mer.</h3>
+                <h3><span>Détection automatique</span> d'évanouissement à la chaleur.</h3>
+                <h3><span>Détection automatique </span> de bateaux proches de baigneurs.</h3>
+                <h3><span>Alerte en temps réel</span> de nos alertes pour les sauveteurs.</h3>
+            </div>
             <div class={"container-safe-beach container-home-page"}>
                 <div className={"wrapper"}>
                     <h2>Retrouver toutes les informations en allant à la plage et aider à alerter.</h2>
@@ -95,10 +102,11 @@ export class Home extends React.Component {
                     button_click__dataLayer("github");
                 }}>GITHUB</span> .</h3>
                 <h3>Petit soutient de l'ESGI : <a
-                    style = {{color: "white", textDecoration: "underline"}}
-                    href={"https://www.esgi.fr/actualites/12012023-le-projet-c2smr-des-etudiants-de-l-esgi"}>Article</a></h3>
+                    style={{color: "white", textDecoration: "underline"}}
+                    href={"https://www.esgi.fr/actualites/12012023-le-projet-c2smr-des-etudiants-de-l-esgi"}>Article</a>
+                </h3>
             </div>
-            <div style={{display : 'none'}} class={"container-types-sensors container-home-page"}>
+            <div style={{display: 'none'}} class={"container-types-sensors container-home-page"}>
                 <div class={"cam"}>
                     <img alt={"camera"}
                          class={"slide5"}
