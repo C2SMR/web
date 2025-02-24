@@ -282,3 +282,39 @@
     position: sticky;
     top: 0;
 }
+
+.container-alert {
+    width: 100vw;
+    height: 100vh;
+    background: $color_white;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    flex-direction: column;
+
+
+    h2 {
+        color: $color_dark_grey;
+        text-align: center;
+
+    }
+
+    h3 {
+        margin-left: 10%;
+        color: $color_dark_grey;
+        width: 80%;
+        font-weight: normal;
+
+        span {
+            font-weight: bold;
+
+            &.link {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
+
+    }
+
+
+}

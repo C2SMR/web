@@ -15,9 +15,7 @@ INITIALISATION FLASK
 """
 RASPBERRY_KEY = sys.argv[1]
 app = Flask(
-    __name__, static_url_path="",
-    static_folder="static",
-    template_folder="templates"
+    __name__, static_url_path="", static_folder="static", template_folder="templates"
 )
 swagger = Swagger(app)
 cors = CORS(app)
@@ -52,8 +50,7 @@ def connect():
         password = key["password"]
         with app.app_context():
             cursor = mysql.connection.cursor()
-            cursor.execute("SELECT password FROM CITY "
-                           "WHERE mail = %s", (mail,))
+            cursor.execute("SELECT password FROM CITY " "WHERE mail = %s", (mail,))
             password_verif = cursor.fetchall()[0][0]
             password = hashlib.sha512(password).hexdigest()
             if password_verif == password:
@@ -164,8 +161,7 @@ def get_nb_personne():
     with app.app_context():
         cursor = mysql.connection.cursor()
         cursor.execute(
-            "SELECT number_beach, number_sea FROM CITY "
-            "WHERE NAME = %s ", (city,)
+            "SELECT number_beach, number_sea FROM CITY " "WHERE NAME = %s ", (city,)
         )
         response = cursor.fetchall()
         cursor.close()
@@ -263,8 +259,7 @@ def set_notif():
     city = key["city"]
     with app.app_context():
         cursor = mysql.connection.cursor()
-        cursor.execute("UPDATE WARNINGS SET notif = 1 "
-                       "WHERE CITY = %s", (city,))
+        cursor.execute("UPDATE WARNINGS SET notif = 1 " "WHERE CITY = %s", (city,))
         cursor.close()
     return jsonify({"res": "yes"})
 
@@ -289,8 +284,9 @@ def get_init_position():
     city = key["city"]
     with app.app_context():
         cursor = mysql.connection.cursor()
-        cursor.execute("SELECT latitude, longitude "
-                       "FROM city WHERE NAME = %s", (city,))
+        cursor.execute(
+            "SELECT latitude, longitude " "FROM city WHERE NAME = %s", (city,)
+        )
         data = cursor.fetchall()
     cursor.close()
     return jsonify({"latitude": data[0][0], "longitude": data[0][1]})
@@ -427,8 +423,7 @@ def set_number_people():
     with app.app_context():
         cursor = mysql.connection.cursor()
         cursor.execute(
-            "UPDATE CITY SET number_beach= %s, "
-            "number_sea= %s" "WHERE NAME = %s",
+            "UPDATE CITY SET number_beach= %s, " "number_sea= %s" "WHERE NAME = %s",
             (nb_beach, nb_sea, city),
         )
         mysql.connection.commit()
@@ -732,8 +727,10 @@ def get_zone():
     city = request.args.get("city")
     with app.app_context():
         cursor = mysql.connection.cursor()
-        cursor.execute("SELECT ID,type,x1,x2,y1,y2 "
-                       "FROM line WHERE ville=%s", (city,), )
+        cursor.execute(
+            "SELECT ID,type,x1,x2,y1,y2 " "FROM line WHERE ville=%s",
+            (city,),
+        )
         all_data = cursor.fetchall()
         cursor.close()
     return jsonify({"data": all_data})
@@ -792,8 +789,7 @@ def add_zone():
     with app.app_context():
         cursor = mysql.connection.cursor()
         cursor.execute(
-            "INSERT INTO line(ville,type,x1,x2,y1,y2) "
-            "VALUES(%s,%s,%s,%s,%s,%s)",
+            "INSERT INTO line(ville,type,x1,x2,y1,y2) " "VALUES(%s,%s,%s,%s,%s,%s)",
             (city, type, x1, x2, y1, y2),
         )
         mysql.connection.commit()
@@ -828,7 +824,10 @@ def delete_zone():
         return jsonify({"res": "key error"})
     with app.app_context():
         cursor = mysql.connection.cursor()
-        cursor.execute("DELETE FROM line WHERE id=%s", (id,), )
+        cursor.execute(
+            "DELETE FROM line WHERE id=%s",
+            (id,),
+        )
         mysql.connection.commit()
         cursor.close()
     return jsonify({"res": "yes"})
@@ -910,19 +909,22 @@ def get_city():
         return jsonify({"error": "detector_id is required"}), 400
 
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT NAME, '
-                   'latitude, '
-                   'longitude, '
-                   'ip, '
-                   'name_ip, '
-                   'password_ip, '
-                   'blur, '
-                   'run_detection, '
-                   'type_detection, '
-                   'launch_detection, '
-                   'stop_detection '
-                   'FROM CITY '
-                   'WHERE detector_id = %s', (detector_id,))
+    cursor.execute(
+        "SELECT NAME, "
+        "latitude, "
+        "longitude, "
+        "ip, "
+        "name_ip, "
+        "password_ip, "
+        "blur, "
+        "run_detection, "
+        "type_detection, "
+        "launch_detection, "
+        "stop_detection "
+        "FROM CITY "
+        "WHERE detector_id = %s",
+        (detector_id,),
+    )
     city_data = cursor.fetchall()
     cursor.close()
     return jsonify({"data": city_data})
@@ -948,9 +950,7 @@ def get_cache_size():
         return jsonify({"error": "detector_id is required"}), 400
 
     cursor = mysql.connection.cursor()
-    cursor.execute(
-        'SELECT cache_size FROM CITY WHERE detector_id = %s', (detector_id,)
-    )
+    cursor.execute("SELECT cache_size FROM CITY WHERE detector_id = %s", (detector_id,))
     result = cursor.fetchone()
     cursor.close()
 
@@ -980,8 +980,7 @@ def get_zone_orange():
 
     cursor = mysql.connection.cursor()
     cursor.execute(
-        'SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 1',
-        (city,)
+        "SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 1", (city,)
     )
     result = cursor.fetchall()
     cursor.close()
@@ -1009,8 +1008,7 @@ def get_zone_red():
 
     cursor = mysql.connection.cursor()
     cursor.execute(
-        'SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 2',
-        (city,)
+        "SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 2", (city,)
     )
     result = cursor.fetchall()
     cursor.close()
@@ -1038,8 +1036,7 @@ def get_zone_green():
 
     cursor = mysql.connection.cursor()
     cursor.execute(
-        'SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 0',
-        (city,)
+        "SELECT x1, x2, y1, y2 FROM line WHERE ville = %s AND type = 0", (city,)
     )
     result = cursor.fetchall()
     cursor.close()
