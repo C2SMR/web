@@ -21,6 +21,7 @@ create table CITY
     launch_detection int null,
     stop_detection   int null,
     public_url      varchar(200) null,
+    save_picture    int default 0
 );
 
 CREATE TABLE DATA
@@ -46,7 +47,7 @@ CREATE TABLE WARNINGS
     information VARCHAR(220),
     picture     VARCHAR(220),
     notif       INTEGER,
-    date        VARCHAR(200),
+    date        VARCHAR(200)
 );
 
 create table line
@@ -61,7 +62,8 @@ create table line
     algo        VARCHAR(200) not null,
     filter_size int null,
     threshold_luminosity int null,
-    description text null
+    description text null,
+    threshold_light_luminosity int null
 );
 
 
@@ -74,9 +76,3 @@ create table line_data
     FOREIGN KEY (line) REFERENCES line (ID)
 )
 
-/*---INSERT INIT DATA---*/
-
-    INSERT INTO DATA(ID)
-VALUES (0);
-INSERT INTO WARNINGS(ID)
-VALUES (0);
