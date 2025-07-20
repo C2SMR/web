@@ -19,7 +19,8 @@ create table CITY
     blur             tinyint(1) null,
     detector_id      int null,
     launch_detection int null,
-    stop_detection   int null
+    stop_detection   int null,
+    public_url      varchar(200) null,
 );
 
 CREATE TABLE DATA
@@ -44,24 +45,38 @@ CREATE TABLE WARNINGS
     color       INTEGER,
     information VARCHAR(220),
     picture     VARCHAR(220),
-    notif       INTEGER
+    notif       INTEGER,
+    date        VARCHAR(200),
 );
 
 create table line
 (
-    ID    int auto_increment primary key,
-    ville VARCHAR(200) not null,
-    type  int          not null,
-    x1    int,
-    x2    int,
-    y1    int,
-    y2    int
+    ID          int auto_increment primary key,
+    ville       VARCHAR(200) not null,
+    type        int          not null,
+    x1          int,
+    x2          int,
+    y1          int,
+    y2          int,
+    algo        VARCHAR(200) not null,
+    filter_size int null,
+    threshold_luminosity int null,
+    description text null
 );
 
 
+create table line_data
+(
+    ID    int auto_increment primary key,
+    line  int          not null,
+    time  varchar(200) not null,
+    value float        not null,
+    FOREIGN KEY (line) REFERENCES line (ID)
+)
+
 /*---INSERT INIT DATA---*/
 
-INSERT INTO DATA(ID)
+    INSERT INTO DATA(ID)
 VALUES (0);
 INSERT INTO WARNINGS(ID)
 VALUES (0);
