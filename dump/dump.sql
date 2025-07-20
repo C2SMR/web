@@ -20,7 +20,7 @@ create table CITY
     detector_id      int null,
     launch_detection int null,
     stop_detection   int null,
-    public_url      varchar(200) null,
+    public_url      varchar(200) null
 );
 
 CREATE TABLE DATA
@@ -46,7 +46,7 @@ CREATE TABLE WARNINGS
     information VARCHAR(220),
     picture     VARCHAR(220),
     notif       INTEGER,
-    date        VARCHAR(200),
+    date        VARCHAR(200)
 );
 
 create table line
