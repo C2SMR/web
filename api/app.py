@@ -1046,7 +1046,7 @@ def get_zone_green():
 
 @app.route("/machine/zone", methods=["GET"])
 @cross_origin()
-def get_zone_green():
+def get_all_zone():
     """
     Get green zone coordinates
     ---
