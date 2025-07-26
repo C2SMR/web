@@ -74,9 +74,3 @@ create table line_data
     FOREIGN KEY (line) REFERENCES line (ID)
 )
 
-/*---INSERT INIT DATA---*/
-
-    INSERT INTO DATA(ID)
-VALUES (0);
-INSERT INTO WARNINGS(ID)
-VALUES (0);
