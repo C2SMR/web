@@ -921,7 +921,8 @@ def get_city():
         "type_detection, "
         "launch_detection, "
         "stop_detection, "
-        "public_url "
+        "public_url, "
+        "save_picture "
         "FROM CITY "
         "WHERE detector_id = %s",
         (detector_id,),
@@ -1065,7 +1066,7 @@ def get_all_zone():
 
     cursor = mysql.connection.cursor()
     cursor.execute(
-        "SELECT id, x1, x2, y1, y2, algo,type,filter_size,threshold_luminosity FROM line WHERE ville = %s",
+        "SELECT id, x1, x2, y1, y2, algo,type,filter_size,threshold_luminosity,threshold_light_luminosity FROM line WHERE ville = %s",
         (city,),
     )
     result = cursor.fetchall()

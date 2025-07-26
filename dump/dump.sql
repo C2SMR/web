@@ -20,7 +20,8 @@ create table CITY
     detector_id      int null,
     launch_detection int null,
     stop_detection   int null,
-    public_url      varchar(200) null
+    public_url      varchar(200) null,
+    save_picture    int default 0
 );
 
 CREATE TABLE DATA
@@ -61,7 +62,8 @@ create table line
     algo        VARCHAR(200) not null,
     filter_size int null,
     threshold_luminosity int null,
-    description text null
+    description text null,
+    threshold_light_luminosity int null
 );
 
 
