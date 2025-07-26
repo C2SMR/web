@@ -920,7 +920,8 @@ def get_city():
         "run_detection, "
         "type_detection, "
         "launch_detection, "
-        "stop_detection "
+        "stop_detection, "
+        "public_url "
         "FROM CITY "
         "WHERE detector_id = %s",
         (detector_id,),
@@ -1041,6 +1042,58 @@ def get_zone_green():
     result = cursor.fetchall()
     cursor.close()
     return jsonify({"data": result})
+
+
+@app.route("/machine/zone", methods=["GET"])
+@cross_origin()
+def get_zone_green():
+    """
+    Get green zone coordinates
+    ---
+    parameters:
+        - name: city
+          in: query
+          type: string
+          required: true
+    responses:
+        200:
+            description: {"data": result}
+    """
+    city = request.args.get("city")
+    if city is None:
+        return jsonify({"error": "city is required"}), 400
+
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "SELECT id, x1, x2, y1, y2, algo,type,filter_size,threshold_luminosity FROM line WHERE ville = %s",
+        (city,),
+    )
+    result = cursor.fetchall()
+    cursor.close()
+    return jsonify({"data": result})
+
+
+@app.route("/machine/post_measuring_data", methods=["POST"])
+@cross_origin()
+def post_measuring_zone_data():
+    key = request.data
+    key = json.loads(key)
+    zone_id = key["zone_id"]
+    counting_data = key["counting_data"]
+    time = key["time"]
+    key = key["key"]
+    if key != RASPBERRY_KEY:
+        return jsonify({"res": "key error"})
+    with app.app_context():
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            "INSERT INTO measuring_data (zone_id, counting_data, time) "
+            "VALUES (%s, %s, %s)",
+            (zone_id, counting_data, time),
+        )
+        mysql.connection.commit()
+        cursor.close()
+    return jsonify({"res": "yes"})
 
 
 """
