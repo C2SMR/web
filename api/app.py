@@ -1088,8 +1088,7 @@ def post_measuring_zone_data():
     with app.app_context():
         cursor = mysql.connection.cursor()
         cursor.execute(
-            "INSERT INTO measuring_data (zone_id, counting_data, time) "
-            "VALUES (%s, %s, %s)",
+            "INSERT INTO line_data (line, value, time) " "VALUES (%s, %s, %s)",
             (zone_id, counting_data, time),
         )
         mysql.connection.commit()
